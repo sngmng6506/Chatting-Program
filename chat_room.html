@@ -1,0 +1,116 @@
+<html lang="ko">
+
+<body>
+    <h1>채팅방</h1>
+    
+    <div id="messagesList">
+        <ul id="messages"></ul>
+    </div>
+
+
+    <form id="form" action="">
+        <input id="input" autocomplete="off" placeholder="" /><button>전송</button>
+    </form>
+
+    <form id="form_to_one" action="">
+        <input id="input_to_one_id" autocomplete="off" placeholder="귓속말 받을 사용자 ID" />
+        <input id="input_to_one_msg" autocomplete="off" placeholder="귓속말 내용" />
+        <button>전송</button>
+    </form>
+
+</body>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    const socket = io({path: '/socket.io'});
+
+
+    // 메세지 전송 이벤트 처리 
+    socket.on('connect', () => {
+        console.log('connected');
+
+    });
+
+    
+
+    // 이전 채팅 불러오기 
+    socket.on('chat_history', (data) => { 
+        console.log(data);
+        data.forEach(item => {
+            displayMessage({username : item.username, msg : item.message});
+        });
+    });
+
+
+    // 메세지 전송 : 전체
+    const sendMsgForm = document.getElementById('form');
+    const msgContent = document.getElementById('input');
+
+    sendMsgForm.addEventListener('submit', (e) => {
+        e.preventDefault(); // 페이지 새로고침 방지
+
+        const msg = msgContent.value.trim();
+
+        console.log(msg);
+        socket.emit('receive_message', {msg : msg});
+        msgContent.value = '';
+    });
+
+
+    
+    // 메세지 전송 : 귓속말
+
+    const sendMsgToOneForm = document.getElementById('form_to_one');
+    const to_one_id = document.getElementById('input_to_one_id');
+    const msgContentToOne = document.getElementById('input_to_one_msg');
+    let toUsername = null;
+
+
+    sendMsgToOneForm.addEventListener('submit', (e) => {
+        e.preventDefault(); // 페이지 새로고침 방지
+        
+        const to = to_one_id.value.trim();
+        const msg = msgContentToOne.value.trim();
+
+        console.log(msg);
+        socket.emit('receive_message_to_one', {to : to, msg : msg });
+        msgContentToOne.value = '';
+    });
+
+    
+
+
+    // 메세지 수신 + UI 업데이트 
+
+    const msgList = document.getElementById('messagesList');
+
+    function displayMessage(message) {
+        const li = document.createElement('li');
+        li.textContent = `${message.username} : ${message.msg}`;
+        msgList.appendChild(li);
+    }
+
+    function displayMessageToOne(message) {
+        const li = document.createElement('li');
+        li.textContent = `[귓속말] ${message.username} : ${message.msg}`;
+        msgList.appendChild(li);
+    }
+
+
+    socket.on('send_message', (data) => {
+        // console.log(data);
+        displayMessage(data);
+        
+    });
+
+    
+    socket.on('send_message_to_one', (data) => {
+        // console.log(data);
+        displayMessageToOne(data);
+    });
+
+
+
+
+
+</script>
+</html>
