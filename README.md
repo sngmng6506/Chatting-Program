@@ -13,13 +13,16 @@ how real-time web chat systems are structured and implemented.
 
 ```mermaid
 graph LR
-    Browser["Web Browser\n(HTML, JavaScript)"]
-    Server["Express Server\n+ Socket.IO"]
-    DB[(PostgreSQL)]
+    Client["Web Browser\n(Login / Chat UI)"]
 
-    Browser -- HTTP --> Server
-    Browser -- WebSocket --> Server
+    Server["Express Server\n- HTTP API (Login / Register)\n- Session Management\n- Socket.IO (Real-time Chat)"]
+
+    DB[(PostgreSQL\nUser & Chat Data)]
+
+    Client -- HTTP --> Server
+    Client -- WebSocket --> Server
     Server -- SQL --> DB
+
 ```
 
 ---
