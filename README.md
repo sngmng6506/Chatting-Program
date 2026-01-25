@@ -1,4 +1,4 @@
-# Chatting Program (Study Project)
+# Chatting Program (Study Project).
 
 This is a **personal study project** created to understand the overall structure of a web-based chatting system.  
 The project focuses on implementing both client-side and server-side components of a chat application using
