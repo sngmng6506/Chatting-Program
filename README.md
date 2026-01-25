@@ -1,27 +1,40 @@
 # Chatting Program (Study Project)
 
-웹 기반 채팅 프로그램의 기본 구조를 이해하기 위해 작성한 **개인 학습용 프로젝트**입니다.  
-HTML과 JavaScript를 사용하여 채팅 애플리케이션의 화면 구성과 페이지 흐름을 직접 구현하는 것을 목표로 했습니다.
+This is a **personal study project** created to understand the overall structure of a web-based chatting system.  
+The project focuses on implementing both client-side and server-side components of a chat application using
+HTML, JavaScript, and Node.js-based technologies.
 
-웹 채팅 시스템의 전반적인 구조를 이해하는 데 초점을 두고 있습니다.
+This is not a production-ready service, but a learning-oriented project aimed at understanding
+how real-time web chat systems are structured and implemented.
 
 ---
 
 ## 🎯 Study Goals
 
-- 웹 채팅 애플리케이션의 기본 동작 흐름 이해
-  - 사용자 등록 → 채팅방 진입 → 메시지 입력
-- HTML 페이지 간 역할 분리 및 구조 설계
-- JavaScript를 활용한 DOM 조작 및 이벤트 처리
-- 클라이언트 단에서의 채팅 UI 로직 이해
+- Understand the overall workflow of a web-based chat application  
+  - User registration → Login → Enter chat room → Send messages
+- Learn how client and server communicate in real time
+- Implement session-based authentication
+- Design and implement real-time messaging features
+- Store and load chat data using a relational database
 
 ---
 
 ## 🛠 Tech Stack
 
+### Frontend
 - HTML
 - JavaScript (Vanilla JS)
-- Node.js (package.json 기준)
+
+### Backend
+- Node.js
+- Express
+- Socket.IO (WebSocket-based real-time communication)
+
+### Database & Security
+- PostgreSQL
+- bcrypt (password hashing)
+- express-session (session-based authentication)
 
 ---
 
@@ -29,9 +42,9 @@ HTML과 JavaScript를 사용하여 채팅 애플리케이션의 화면 구성과
 
 ```text
 Chatting-Program/
-├── index.html        # 메인 페이지
-├── register.html     # 사용자 등록 페이지
-├── chat_room.html    # 채팅방 UI 화면
-├── index.js          # 클라이언트 로직 및 이벤트 처리
+├── index.html        # Main entry page (login)
+├── register.html     # User registration page
+├── chat_room.html    # Chat room UI
+├── index.js          # Server and Socket.IO logic
 ├── package.json
-└── package-lock.json
+└── package-lock.json # Dependency lock file
