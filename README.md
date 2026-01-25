@@ -9,6 +9,21 @@ how real-time web chat systems are structured and implemented.
 
 ---
 
+## 🏗 System Architecture
+
+```mermaid
+graph LR
+    Browser[Web Browser<br/>(HTML / JS)]
+    Server[Express Server<br/>+ Socket.IO]
+    DB[(PostgreSQL)]
+
+    Browser -- HTTP --> Server
+    Browser -- WebSocket --> Server
+    Server -- SQL --> DB
+
+
+---
+
 ## 🎯 Study Goals
 
 - Understand the overall workflow of a web-based chat application  
