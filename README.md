@@ -16,12 +16,10 @@ graph LR
     Browser["Web Browser\n(HTML, JavaScript)"]
     Server["Express Server\n+ Socket.IO"]
     DB[(PostgreSQL)]
-    Error([에러 발생!])
 
-    Browser -- "HTTP / WS" --> Server
-    Server -- "SQL Query" --> DB
-    DB -.-> Error
-    style Error fill:#f96,stroke:#333,stroke-width:2px
+    Browser -- HTTP --> Server
+    Browser -- WebSocket --> Server
+    Server -- SQL --> DB
 ```
 
 ---
