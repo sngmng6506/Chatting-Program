@@ -22,6 +22,8 @@ graph LR
     Server -- "SQL Query" --> DB
     DB -.-> Error
     style Error fill:#f96,stroke:#333,stroke-width:2px
+```
+
 ---
 
 ## 🎯 Study Goals
